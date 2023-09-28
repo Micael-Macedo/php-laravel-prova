@@ -22,6 +22,11 @@
         <a href="{{route('realtyType.index')}}">Tipo Imovel</a>
     </nav>
 </header>
+<div class="message">
+    @if(session('msg'))
+        <p>{{session('msg')}}</p>
+    @endif
+</div>
 @yield('content')
 </body>
 </html>

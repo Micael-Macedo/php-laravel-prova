@@ -77,20 +77,21 @@ class RealtyController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['offer_type'] = $data['offer_type'] === 'on' ? 1: 0;
+        $data['offer_type'] = isset($data['offer_type']) ? 1: 0;
         $data = array($data);
         $realty = Realty::create($data[0]);
-        if($request->images){
+        $images = $request->all()['images'];
+        if(isset($images)){
             $index = 0;
-            foreach ($request->images as $image){
+            foreach ($images as $image){
                 $id = random_int(0, 5000);
-                $data = (object)['filepath' => "imgs/" . $image->getClientOriginalName() . $id ,'upload_date' => date('Y-m-d H:i:s'), 'isThumbnail' => $index === 0 ? 1: 0, "realtyId" => $realty->id];
-                $image->move(public_path('imgs/', $image->getClientOriginalName() . $id));
-                Image::create($data);
+                $dataImage = array(['filepath' => "imgs/" . $image->getClientOriginalName() . $id ,'upload_date' => date('Y-m-d H:i:s'), 'isThumbnail' => $index === 0 ? 1: 0, "realty_id" => $realty->id]);
+                $image->move(public_path('imgs/'),$image->getClientOriginalName() . $id);
+                Image::create($dataImage[0]);
                 $index+= 1;
             }
         }
-        return view('/');
+        return redirect('/realty')->with('msg', 'sucesso');
 
     }
 }

@@ -1,11 +1,16 @@
 @extends('layout.main')
 @section('content')
-<a href="{{route('realty.create')}}">Criar</a>
-    @foreach($realtys as $realty)
+<a href="{{route('realty.create')}}">Criar novo</a>
         <div class="container d-flex align-items-center justify-content-between mt-4">
-            <!-- Card : Início -->
+    @foreach($realtys as $realty)
             <div class="realty-card d-flex align-items-center justify-content-center position-relative card">
-                <img class="object-fit-cover border-primary-subtle border" src="assets/img/casa1.png" alt=""/>
+                @if($realty->images)
+                    @foreach($realty->images as $image)
+                        @if($image->isThumbnail == 1)
+                            <img class="object-fit-cover border-primary-subtle border" src="/{{$image->filepath}}" alt=""/>
+                        @endif
+                    @endforeach
+                @endif
                 <div class="d-flex align-items-end justify-content-end position-absolute flex-column realty-card-data">
                     <span class="bg-primary rounded-top-right rounded-bottom-left text-light px-5 py-2 position-absolute price-tag">{{$realty->value}}/Mês</span>
                     <div class="realty-card-data-info p-4 bg-white rounded-top-right rounded-bottom-right rounded-bottom-left rounded-top-left border-dark-subtle border">
@@ -32,6 +37,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
     @endforeach
+            </div>
 @endsection

@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     use HasFactory;
-    protected $fillable = ['filepath', 'upload_date', 'isThumbnail', 'realtyId'];
+    protected $fillable = ['filepath', 'upload_date', 'isThumbnail', 'realty_id'];
+
+
 }

@@ -22,4 +22,8 @@ class Realty extends Model
     {
         return $this->belongsTo(Neighborhood::class);
     }
+
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
 }

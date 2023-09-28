@@ -3,7 +3,7 @@
 <form action="/realty" method="post" enctype="multipart/form-data">
     @csrf
     <label for="">Nome</label>
-    <input type="file" name="images">
+    <input type="file" name="images[]" multiple="multiple">
     <input name="address" type="text">
     <input name="comments" type="text">
     <input name="offer_type" type="checkbox">
